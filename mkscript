@@ -1,0 +1,40 @@
+#!/bin/bash
+#
+# mkscript will perform repetitive tasks for you.
+# it will make a new script, and make it executable.
+# then will open it in an Text Editor for you.
+# 
+# This has been adapted by zoose from a bash script tutorial.
+# Thanks: dedicated to the great ship Enterprise A.
+# Shaggytwodope.
+#
+# Text Editor used is Sublime-Text 3. Might need to install it.
+#
+# Set Variables:
+LOCATION=$(pwd)
+EDITOR="/usr/bin/subl3"
+
+# Checks to see if user gave enough arguments.
+# If no second argument is provided then the
+# LOCATION is set to the current directory, and
+# your script will be created there.
+if [ $# -lt 1 ]; then
+echo "Use mkscript <scriptname> [<location>]'."
+exit
+fi
+
+# Checks to see if arguments are usable
+if [ $2 ]; then
+if [ ! -d "$2" ]; then
+echo "Location does not exist."
+exit
+else
+LOCATION="$2"
+fi
+fi
+
+# Execute necessary commands
+SCRIPT_PATH="$LOCATION/$1"
+touch $SCRIPT_PATH
+chmod +x $SCRIPT_PATH
+$EDITOR $SCRIPT_PATH &
